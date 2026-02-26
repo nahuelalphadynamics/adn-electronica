@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../../context/LanguageContext';
@@ -13,6 +13,7 @@ export const MilestonesSection: React.FC = () => {
 
     const sectionRef = useRef<HTMLDivElement>(null);
     const rowsRef = useRef<(HTMLDivElement | null)[]>([]);
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
     const milestones = t.milestone_list;
 
@@ -71,18 +72,19 @@ export const MilestonesSection: React.FC = () => {
                         <div
                             key={idx}
                             ref={el => { rowsRef.current[idx] = el; }}
-                            className="group grid grid-cols-1 lg:grid-cols-12 items-center py-10 border-b border-white/10 transition-all duration-500 active:bg-white/[0.05] md:hover:bg-white/[0.02] border-l-2 border-transparent md:hover:border-primary md:hover:pl-4"
+                            onClick={() => setActiveIndex(activeIndex === idx ? null : idx)}
+                            className={`group grid grid-cols-1 lg:grid-cols-12 items-center py-10 border-b border-white/10 transition-all duration-500 cursor-pointer md:hover:bg-white/[0.02] border-l-2 md:hover:border-primary md:hover:pl-4 ${activeIndex === idx ? 'bg-white/[0.05] border-primary pl-4' : 'border-transparent'}`}
                         >
                             {/* COL 1: TAG */}
                             <div className="lg:col-span-4 mb-4 lg:mb-0">
-                                <span className="text-sm font-mono text-[#8B949E] tracking-widest uppercase transition-colors duration-300 group-hover:text-primary">
+                                <span className={`text-sm font-mono tracking-widest uppercase transition-colors duration-300 group-hover:text-primary ${activeIndex === idx ? 'text-primary' : 'text-[#8B949E]'}`}>
                                     {ms.tag}
                                 </span>
                             </div>
 
                             {/* COL 2: DESCRIPTION */}
                             <div className="lg:col-span-8">
-                                <p className="text-base md:text-lg text-gray-300 md:text-[#A1A1AA] leading-relaxed max-w-4xl font-sans transition-colors duration-300 md:group-hover:text-white">
+                                <p className={`text-base md:text-lg leading-relaxed max-w-4xl font-sans transition-colors duration-300 md:group-hover:text-white ${activeIndex === idx ? 'text-white' : 'text-gray-300 md:text-[#A1A1AA]'}`}>
                                     {ms.description}
                                 </p>
                             </div>

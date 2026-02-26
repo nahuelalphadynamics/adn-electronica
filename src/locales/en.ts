@@ -52,7 +52,8 @@ export const en = {
         milestones_archive: "Historical_Archive",
         milestones_title: "VALIDATED",
         milestones_title_ghost: "MILESTONES.",
-        orbital_standard: "CRITICAL MISSION STANDARDS"
+        orbital_standard: "CRITICAL MISSION STANDARDS",
+        swipe_to_explore: "[ SWIPE TO EXPLORE ]"
     },
     milestone_list: [
         {

@@ -47,6 +47,9 @@ export const IndustriesSection: React.FC = () => {
     ];
 
     const startAutoPlay = () => {
+        // Disable autoplay on mobile
+        if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
+
         stopAutoPlay();
         autoPlayRef.current = setInterval(() => {
             setActiveIndustry((prev) => (prev + 1) % industries.length);
@@ -61,7 +64,21 @@ export const IndustriesSection: React.FC = () => {
 
     useEffect(() => {
         startAutoPlay();
-        return () => stopAutoPlay();
+
+        // Optional: Re-run auto-play check on resize
+        const handleResize = () => {
+            if (window.innerWidth < 1024) {
+                stopAutoPlay();
+            } else if (!autoPlayRef.current) {
+                startAutoPlay();
+            }
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            stopAutoPlay();
+            window.removeEventListener('resize', handleResize);
+        }
     }, []);
 
     const handleIndustryClick = (id: number) => {
@@ -88,7 +105,7 @@ export const IndustriesSection: React.FC = () => {
                         {/* SWIPE INDICATOR FOR MOBILE */}
                         <div className="flex lg:hidden items-center gap-2 mb-2 animate-pulse text-primary font-mono text-[10px] tracking-widest">
                             <span className="material-symbols-outlined text-sm">swipe</span>
-                            [ DESLIZAR PARA EXPLORAR ]
+                            {t.sections.swipe_to_explore}
                         </div>
                         <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible whitespace-nowrap lg:whitespace-normal snap-x snap-mandatory scrollbar-hide pb-4 lg:pb-0">
                             {industries.map((ind) => (
@@ -104,11 +121,10 @@ export const IndustriesSection: React.FC = () => {
                                         }`}>
                                         {ind.title}
                                     </span>
-                                    {activeIndustry === ind.id && (
-                                        <p className="mt-3 text-sm md:text-base text-gray-300 md:text-[#A1A1AA] leading-relaxed whitespace-normal break-words text-wrap max-w-full w-full opacity-100 transition-opacity duration-300">
-                                            {ind.description}
-                                        </p>
-                                    )}
+
+                                    <p className={`mt-3 text-sm md:text-base leading-relaxed whitespace-normal break-words text-wrap max-w-full w-full transition-all duration-300 ${activeIndustry === ind.id ? "text-gray-300 md:text-[#A1A1AA] opacity-100" : "text-gray-400 md:text-[#8B949E] opacity-100 lg:opacity-60 group-hover:opacity-100"}`}>
+                                        {ind.description}
+                                    </p>
                                 </button>
                             ))}
                         </div>
@@ -117,18 +133,17 @@ export const IndustriesSection: React.FC = () => {
                     {/* VIDEO CONTAINER */}
                     <div className="w-full lg:w-2/3 relative">
                         <div className="aspect-video w-full bg-[#0A0E17] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl">
-                            {inView && (
+                            {inView && industries.map((ind) => (
                                 <video
-                                    key={activeIndustry}
+                                    key={ind.id}
                                     autoPlay
                                     loop
                                     muted
                                     playsInline
-                                    className="w-full h-full object-cover scale-[1.14] origin-center animate-in fade-in duration-1000"
-                                >
-                                    <source src={industries[activeIndustry].video} type="video/mp4" />
-                                </video>
-                            )}
+                                    className={`absolute inset-0 w-full h-full object-cover scale-[1.14] origin-center transition-opacity duration-700 ease-in-out ${activeIndustry === ind.id ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                                    src={ind.video}
+                                />
+                            ))}
 
                             {/* SCANLINES & OVERLAY - REMOVED LOCAL TO USE GLOBAL APP SCANLINES */}
                             <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-black/10" />
