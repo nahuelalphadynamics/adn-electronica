@@ -1,4 +1,4 @@
-import { useRef, forwardRef, useMemo, useEffect } from 'react';
+import { useRef, forwardRef, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, Center, Resize } from '@react-three/drei';
 import * as THREE from 'three';

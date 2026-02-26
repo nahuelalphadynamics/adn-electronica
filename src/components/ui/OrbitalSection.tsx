@@ -83,6 +83,11 @@ export const OrbitalSection: React.FC = () => {
                         <MainScene />
                         <OrbitControls enableZoom={false} enablePan={false} />
                     </Suspense>
+
+                    {/* 6. POST-PROCESSING: Cinematic Bloom */}
+                    <EffectComposer>
+                        <Bloom luminanceThreshold={0.5} mipmapBlur luminanceSmoothing={0.9} intensity={1.2} />
+                    </EffectComposer>
                 </Canvas>
             </div>
 
