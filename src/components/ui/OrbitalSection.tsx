@@ -51,7 +51,7 @@ export const OrbitalSection: React.FC = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full min-h-[140vh] md:min-h-screen bg-transparent overflow-hidden flex items-center pb-64 md:pb-0"
+            className="relative w-full min-h-[100svh] md:min-h-screen bg-transparent overflow-hidden flex flex-col justify-start pt-32 md:justify-center md:pt-0 pb-0"
         >
             {/* CAPA 0: EXOSKELETON CSS FORZADO (Resuelve colapso de contenedor en móvil) */}
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100%', minHeight: '100vh', zIndex: 0, overflow: 'visible', pointerEvents: 'none' }}>

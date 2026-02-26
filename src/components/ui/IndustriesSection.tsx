@@ -51,6 +51,39 @@ const IndustryCard: React.FC<IndustryCardProps> = ({ ind, isActive, onClick, onC
     );
 };
 
+interface ManagedVideoProps {
+    ind: Industry;
+    isActive: boolean;
+}
+
+const ManagedVideo: React.FC<ManagedVideoProps> = ({ ind, isActive }) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        if (!videoRef.current) return;
+
+        if (isActive) {
+            // Play when active
+            videoRef.current.play().catch(e => console.log("Video play interrupted:", e));
+        } else {
+            // Pause when inactive to free decoder resources on iOS
+            videoRef.current.pause();
+        }
+    }, [isActive]);
+
+    return (
+        <video
+            ref={videoRef}
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className={`absolute inset-0 w-full h-full object-cover scale-[1.14] origin-center transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+            src={ind.video}
+        />
+    );
+};
+
 export const IndustriesSection: React.FC = () => {
     const { language } = useLanguage();
     const t = language === 'EN' ? en : es;
@@ -169,14 +202,10 @@ export const IndustriesSection: React.FC = () => {
                     <div className="w-full lg:w-2/3 relative">
                         <div className="aspect-video w-full bg-[#0A0E17] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl">
                             {inView && industries.map((ind) => (
-                                <video
+                                <ManagedVideo
                                     key={ind.id}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className={`absolute inset-0 w-full h-full object-cover scale-[1.14] origin-center transition-opacity duration-700 ease-in-out ${activeIndustry === ind.id ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-                                    src={ind.video}
+                                    ind={ind}
+                                    isActive={activeIndustry === ind.id}
                                 />
                             ))}
 

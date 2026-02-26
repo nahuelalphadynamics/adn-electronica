@@ -41,7 +41,7 @@ export const RealisticSatellite = forwardRef<THREE.Group, any>((props, ref) => {
 
             // Positioning (Phase 62: Final Composition & Mobile Visibility Fix)
             if (isMobile) {
-                contentRef.current.position.set(0, -0.5, 0); // Lifted to rescue visibility
+                contentRef.current.position.set(0, -1.0, 0); // Lifted to rescue visibility
             } else {
                 contentRef.current.position.set(2.2, -0.2, 0); // Closer to text for better framing
             }
@@ -55,7 +55,7 @@ export const RealisticSatellite = forwardRef<THREE.Group, any>((props, ref) => {
                 {/* 1. Center: Corrige si el origen está descentrado */}
                 <Center>
                     {/* 2. Resize: Forza al modelo a medir exactamente el valor 'scale' en su eje más largo */}
-                    <Resize scale={isMobile ? 1.8 : 7.5}>
+                    <Resize scale={isMobile ? 2.8 : 7.5}>
                         <primitive object={scene} />
                     </Resize>
                 </Center>
