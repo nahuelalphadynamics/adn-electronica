@@ -59,14 +59,18 @@ interface ManagedVideoProps {
 const ManagedVideo: React.FC<ManagedVideoProps> = ({ ind, isActive }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    const tryPlay = () => {
+        if (isActive && videoRef.current) {
+            videoRef.current.play().catch(e => console.log("Video play interrupted:", e));
+        }
+    };
+
     useEffect(() => {
         if (!videoRef.current) return;
 
         if (isActive) {
-            // Play when active
-            videoRef.current.play().catch(e => console.log("Video play interrupted:", e));
+            tryPlay();
         } else {
-            // Pause when inactive to free decoder resources on iOS
             videoRef.current.pause();
         }
     }, [isActive]);
@@ -77,7 +81,9 @@ const ManagedVideo: React.FC<ManagedVideoProps> = ({ ind, isActive }) => {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
+            onCanPlay={tryPlay}
+            onLoadedData={tryPlay}
             className={`absolute inset-0 w-full h-full object-cover scale-[1.14] origin-center transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
             src={ind.video}
         />
