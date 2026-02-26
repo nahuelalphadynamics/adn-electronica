@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #020202;
+    font-family: 'Inter', 'monospace', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #ffffff;
+}
+
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+canvas {
+    display: block;
+}
+
+.app-container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Typography Scale & Responsiveness */
+h1 {
+    font-size: clamp(2rem, 8vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    line-height: 1.2;
+}
+
+p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.6;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #020202;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #00ffcc;
+}
+
+/* HUD Style elements */
+.hud-tag {
+    color: #ff3333;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    font-family: 'monospace';
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 15vw 5vw !important;
+    }
+}
+
+/* Efecto Glitch delegado a la GPU */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -1px 0 #ff3333;
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: -1px 0 #00ffcc;
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip-path: polygon(0 15%, 100% 15%, 100% 25%, 0 25%);
+    }
+
+    20% {
+        clip-path: polygon(0 60%, 100% 60%, 100% 65%, 0 65%);
+    }
+
+    40% {
+        clip-path: polygon(0 40%, 100% 40%, 100% 50%, 0 50%);
+    }
+
+    60% {
+        clip-path: polygon(0 80%, 100% 80%, 100% 85%, 0 85%);
+    }
+
+    80% {
+        clip-path: polygon(0 10%, 100% 10%, 100% 30%, 0 30%);
+    }
+
+    100% {
+        clip-path: polygon(0 30%, 100% 30%, 100% 45%, 0 45%);
+    }
+}
+
+/* Línea de escaneo CRT */
+.scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 255, 204, 0.2);
+    opacity: 0.3;
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(-100vh);
+    }
+
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+.telemetry-desktop {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .telemetry-desktop {
+        display: none;
+    }
+}

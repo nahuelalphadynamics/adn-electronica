@@ -1,0 +1,32 @@
+{
+    "hero": {
+        "title": "ADN ENGINEERING",
+        "subtitle": "Electronic Engineering with Integrated Industrial Capability",
+        "description": "We design, develop, manufacture and validate electronic systems under a unified structure."
+    },
+    "facility": {
+        "title": "Our Industrial Facility",
+        "description": "ADN Engineering operates from an 800 m² industrial production facility specifically structured to integrate engineering and manufacturing."
+    },
+    "technology": {
+        "title": "Advanced PTH Technology",
+        "description": "Unique in Latin America. High-quality PTH production facility designed for superior metallization performance."
+    },
+    "industries": {
+        "title": "High-Reliability Sectors",
+        "description": "Aerospace, Mining, Oil & Gas, and Railway Systems. \"We do not design laboratory prototypes. We design systems prepared for real-world operation.\""
+    },
+    "aerospace": {
+        "tag": "// AEROSPACE CERTIFICATION",
+        "title": "Orbital Grade",
+        "description": "Technology providers for satellite missions under strict quality filters from CONAE. Our engineering withstands the most extreme conditions of space vacuum and radiation."
+    },
+    "nav": {
+        "enter": "Enter System",
+        "language_es": "ESPAÑOL",
+        "language_en": "ENGLISH"
+    },
+    "loader": {
+        "decoding": "DECODING HARDWARE..."
+    }
+}

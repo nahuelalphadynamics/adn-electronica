@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00e1ff;
+  --color-primary-dim: #00b8d4;
+  --color-background-dark: #0A0E17;
+  --color-surface-dark: #0d121f;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(10, 14, 23, 0.6);
+    backdrop-filter: blur(10px);
+    border: 0.5px solid rgba(0, 225, 255, 0.15);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 225, 255, 0.5), 0 0 20px rgba(0, 225, 255, 0.2);
+  }
+
+  .engineering-grid {
+    background-image:
+      linear-gradient(rgba(0, 225, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 225, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .scanlines {
+    background: linear-gradient(to bottom,
+        transparent 50%,
+        rgba(0, 225, 255, 0.01) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+
+  .reveal-text {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Evitar scrollbars feas */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #010101;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #204b42;
+  border-radius: 4px;
+}

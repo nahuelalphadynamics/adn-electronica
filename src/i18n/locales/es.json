@@ -1,0 +1,32 @@
+{
+    "hero": {
+        "title": "ADN INGENIERÍA",
+        "subtitle": "Ingeniería Electrónica con Capacidad Industrial Integrada",
+        "description": "Diseñamos, desarrollamos, fabricamos y validamos sistemas electrónicos bajo una estructura unificada."
+    },
+    "facility": {
+        "title": "Nuestra Planta Industrial",
+        "description": "ADN Ingeniería opera desde una planta de producción industrial de 800 m² estructurada para integrar ingeniería y manufactura."
+    },
+    "technology": {
+        "title": "Tecnología PTH de Avanzada",
+        "description": "Única en Latinoamérica. Planta de producción de PTH de alta calidad diseñada para un rendimiento de metalización superior."
+    },
+    "industries": {
+        "title": "Sectores de Alta Confiabilidad",
+        "description": "Aeroespacial, Minería, Petróleo y Gas, y Sistemas Ferroviarios. \"No diseñamos prototipos de laboratorio. Diseñamos sistemas preparados para la operación en el mundo real.\""
+    },
+    "aerospace": {
+        "tag": "// CERTIFICACIÓN AEROESPACIAL",
+        "title": "Grado Orbital",
+        "description": "Proveedores de tecnología para misiones satelitales bajo estrictos filtros de calidad de la CONAE. Nuestra ingeniería soporta las condiciones más extremas del vacío espacial y la radiación."
+    },
+    "nav": {
+        "enter": "Ingresar Sistema",
+        "language_es": "ESPAÑOL",
+        "language_en": "ENGLISH"
+    },
+    "loader": {
+        "decoding": "DESENCRIPTANDO HARDWARE..."
+    }
+}
