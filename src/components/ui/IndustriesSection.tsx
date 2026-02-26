@@ -11,6 +11,46 @@ interface Industry {
     video: string;
 }
 
+interface IndustryCardProps {
+    ind: Industry;
+    isActive: boolean;
+    onClick: (id: number) => void;
+    onCentered: (id: number) => void;
+}
+
+const IndustryCard: React.FC<IndustryCardProps> = ({ ind, isActive, onClick, onCentered }) => {
+    const { ref, inView } = useInView({
+        threshold: 0.6,
+        rootMargin: "0px -20% 0px -20%",
+    });
+
+    useEffect(() => {
+        if (inView && typeof window !== 'undefined' && window.innerWidth < 1024) {
+            onCentered(ind.id);
+        }
+    }, [inView, ind.id, onCentered]);
+
+    return (
+        <button
+            ref={ref}
+            onClick={() => onClick(ind.id)}
+            className={`group flex flex-col items-start p-4 lg:p-6 text-left transition-all duration-300 border-l-2 lg:border-l-2 border-t-0 lg:border-t-0 snap-center min-w-[85vw] md:min-w-0 flex-shrink-0 min-h-[160px] md:min-h-0 whitespace-normal text-left max-w-full overflow-hidden ${isActive
+                ? "border-primary bg-white/5"
+                : "border-transparent hover:border-white/20 hover:bg-white/[0.02]"
+                }`}
+        >
+            <span className={`text-lg md:text-xl font-display font-bold uppercase tracking-tight ${isActive ? "text-white" : "text-[#8B949E]"
+                }`}>
+                {ind.title}
+            </span>
+
+            <p className={`mt-3 text-sm md:text-base leading-relaxed whitespace-normal break-words text-wrap max-w-full w-full transition-all duration-300 ${isActive ? "text-gray-300 md:text-[#A1A1AA] opacity-100" : "text-gray-400 md:text-[#8B949E] opacity-100 lg:opacity-60 group-hover:opacity-100"}`}>
+                {ind.description}
+            </p>
+        </button>
+    );
+};
+
 export const IndustriesSection: React.FC = () => {
     const { language } = useLanguage();
     const t = language === 'EN' ? en : es;
@@ -109,23 +149,18 @@ export const IndustriesSection: React.FC = () => {
                         </div>
                         <div className="flex flex-row lg:flex-col gap-4 overflow-x-auto lg:overflow-visible whitespace-nowrap lg:whitespace-normal snap-x snap-mandatory scrollbar-hide pb-4 lg:pb-0">
                             {industries.map((ind) => (
-                                <button
+                                <IndustryCard
                                     key={ind.id}
-                                    onClick={() => handleIndustryClick(ind.id)}
-                                    className={`group flex flex-col items-start p-4 lg:p-6 text-left transition-all duration-300 border-l-2 lg:border-l-2 border-t-0 lg:border-t-0 snap-center min-w-[85vw] md:min-w-0 flex-shrink-0 min-h-[160px] md:min-h-0 whitespace-normal text-left max-w-full overflow-hidden ${activeIndustry === ind.id
-                                        ? "border-primary bg-white/5"
-                                        : "border-transparent hover:border-white/20 hover:bg-white/[0.02]"
-                                        }`}
-                                >
-                                    <span className={`text-lg md:text-xl font-display font-bold uppercase tracking-tight ${activeIndustry === ind.id ? "text-white" : "text-[#8B949E]"
-                                        }`}>
-                                        {ind.title}
-                                    </span>
-
-                                    <p className={`mt-3 text-sm md:text-base leading-relaxed whitespace-normal break-words text-wrap max-w-full w-full transition-all duration-300 ${activeIndustry === ind.id ? "text-gray-300 md:text-[#A1A1AA] opacity-100" : "text-gray-400 md:text-[#8B949E] opacity-100 lg:opacity-60 group-hover:opacity-100"}`}>
-                                        {ind.description}
-                                    </p>
-                                </button>
+                                    ind={ind}
+                                    isActive={activeIndustry === ind.id}
+                                    onClick={handleIndustryClick}
+                                    onCentered={(id) => {
+                                        if (activeIndustry !== id) {
+                                            setActiveIndustry(id);
+                                            startAutoPlay();
+                                        }
+                                    }}
+                                />
                             ))}
                         </div>
                     </div>

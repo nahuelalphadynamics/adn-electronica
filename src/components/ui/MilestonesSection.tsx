@@ -84,7 +84,7 @@ export const MilestonesSection: React.FC = () => {
 
                             {/* COL 2: DESCRIPTION */}
                             <div className="lg:col-span-8">
-                                <p className={`text-base md:text-lg leading-relaxed max-w-4xl font-sans transition-colors duration-300 md:group-hover:text-white ${activeIndex === idx ? 'text-white' : 'text-gray-300 md:text-[#A1A1AA]'}`}>
+                                <p className={`text-base md:text-lg whitespace-normal break-words leading-relaxed max-w-4xl font-sans transition-colors duration-300 md:group-hover:text-white ${activeIndex === idx ? 'text-white' : 'text-gray-300 md:text-[#A1A1AA]'}`}>
                                     {ms.description}
                                 </p>
                             </div>

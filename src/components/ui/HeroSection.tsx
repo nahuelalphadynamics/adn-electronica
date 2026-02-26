@@ -72,9 +72,9 @@ export const HeroSection: React.FC<HeroProps> = ({ isStarted }) => {
                                 <img
                                     src="/assets/logo-adn.svg"
                                     alt="ADN Logo"
-                                    className="w-48 md:w-80 lg:w-[32rem] h-auto"
+                                    className="w-64 md:w-80 lg:w-[32rem] h-auto"
                                 />
-                                <span ref={subRef} className="text-white font-mono text-[10px] md:text-xs tracking-[1.5em] uppercase mt-6 ml-[1.5em] opacity-0">
+                                <span ref={subRef} className="text-white font-mono text-xs md:text-sm tracking-[1.5em] uppercase mt-6 mr-[-1.5em] opacity-0">
                                     {language === 'EN' ? 'Engineering' : 'Ingeniería'}
                                 </span>
                             </div>
