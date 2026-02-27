@@ -8,8 +8,10 @@ export const SceneDirector = ({ particlesRef, satelliteRef, rimLightRef }: { par
     useEffect(() => {
         const ctx = gsap.context(() => {
             // Initial State: Satellite fixed and massive
-            gsap.set(satelliteRef.current.position, { x: 3.5, y: 0, z: 0 });
-            gsap.set(satelliteRef.current.rotation, { x: 0, y: 0, z: 0 });
+            if (satelliteRef.current) {
+                gsap.set(satelliteRef.current.position, { x: 3.5, y: 0, z: 0 });
+                gsap.set(satelliteRef.current.rotation, { x: 0, y: 0, z: 0 });
+            }
 
             if (rimLightRef.current) {
                 gsap.set(rimLightRef.current, { intensity: 0 });
@@ -34,15 +36,17 @@ export const SceneDirector = ({ particlesRef, satelliteRef, rimLightRef }: { par
             }
 
             // 2. SATELLITE ANCHORING: El satélite se queda en su sección
-            gsap.to(satelliteRef.current.position, {
-                y: 15, // Fuera de cámara arriba
-                scrollTrigger: {
-                    trigger: "#orbital-section",
-                    start: "bottom center",
-                    end: "bottom top",
-                    scrub: true,
-                }
-            });
+            if (satelliteRef.current) {
+                gsap.to(satelliteRef.current.position, {
+                    y: 15, // Fuera de cámara arriba
+                    scrollTrigger: {
+                        trigger: "#orbital-section",
+                        start: "bottom center",
+                        end: "bottom top",
+                        scrub: true,
+                    }
+                });
+            }
 
             // 3. Hero Back-to-top behavior (Particles only)
             const tlHero = gsap.timeline({
@@ -54,10 +58,12 @@ export const SceneDirector = ({ particlesRef, satelliteRef, rimLightRef }: { par
                 }
             });
 
-            tlHero.to(particlesRef.current.position, {
-                z: 0,
-                ease: "power2.out"
-            }, 0);
+            if (particlesRef.current) {
+                tlHero.to(particlesRef.current.position, {
+                    z: 0,
+                    ease: "power2.out"
+                }, 0);
+            }
 
             // 4. Global Text Reveal Logic with Professional Stagger
             const revealElements = document.querySelectorAll('.reveal-text');

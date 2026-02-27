@@ -18,34 +18,29 @@ export const MilestonesSection: React.FC = () => {
     const milestones = t.milestone_list;
 
     useEffect(() => {
-        // Clear previous triggers if any to prevent duplicates on language change
-        ScrollTrigger.getAll().forEach(t => {
-            if (t.trigger && rowsRef.current.includes(t.trigger as HTMLDivElement)) {
-                t.kill();
-            }
-        });
-
-        rowsRef.current.forEach((row, i) => {
-            if (!row) return;
-            gsap.fromTo(row,
-                { y: 30, opacity: 0 },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 1,
-                    delay: i * 0.15,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: row,
-                        start: "top 90%",
-                        toggleActions: "play none none reverse"
+        const ctx = gsap.context(() => {
+            rowsRef.current.forEach((row, i) => {
+                if (!row) return;
+                gsap.fromTo(row,
+                    { y: 30, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        delay: i * 0.15,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 90%",
+                            toggleActions: "play none none reverse"
+                        }
                     }
-                }
-            );
+                );
+            });
         });
 
         return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
+            ctx.revert();
         };
     }, [language]); // Re-run when language changes to re-trigger animations on new content
 

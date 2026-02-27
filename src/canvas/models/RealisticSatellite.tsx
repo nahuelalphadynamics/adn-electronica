@@ -11,9 +11,6 @@ export const RealisticSatellite = forwardRef<THREE.Group, any>((props, ref) => {
     const { scene } = useGLTF(modelPath);
     const contentRef = useRef<THREE.Group>(null!);
 
-    // Telemetría 3D (Phase 66)
-    console.log(`🚀 TELEMETRÍA 3D -> Aspect Ratio: ${viewport.aspect.toFixed(2)} | isMobile detectado: ${isMobile}`);
-
     // Phase 71: Visual Premium Upgrade (Titanium Forced)
     useEffect(() => {
         if (!scene) return;

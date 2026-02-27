@@ -40,6 +40,14 @@
   .reveal-text {
     opacity: 0;
     transform: translateY(20px);
+    animation: reveal-fallback 0s 4s forwards;
+  }
+
+  @keyframes reveal-fallback {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .scrollbar-hide::-webkit-scrollbar {

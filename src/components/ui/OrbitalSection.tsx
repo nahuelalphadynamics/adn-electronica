@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { en } from '../../locales/en';
 import { es } from '../../locales/es';
+import { ErrorBoundary } from './ErrorBoundary';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,27 +25,29 @@ export const OrbitalSection: React.FC = () => {
     });
 
     useEffect(() => {
-        const elements = document.querySelectorAll('.reveal-text');
-        elements.forEach((el, i) => {
-            gsap.fromTo(el,
-                { opacity: 0, y: 20 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    delay: i * 0.1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 85%",
-                        toggleActions: "play none none reverse"
+        const ctx = gsap.context(() => {
+            const elements = document.querySelectorAll('.reveal-text');
+            elements.forEach((el, i) => {
+                gsap.fromTo(el,
+                    { opacity: 0, y: 20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 1,
+                        delay: i * 0.1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
                     }
-                }
-            );
+                );
+            });
         });
 
         return () => {
-            ScrollTrigger.getAll().forEach(t => t.kill());
+            ctx.revert();
         };
     }, [language]);
 
@@ -55,40 +58,42 @@ export const OrbitalSection: React.FC = () => {
         >
             {/* CAPA 0: EXOSKELETON CSS FORZADO (Resuelve colapso de contenedor en móvil) */}
             <div style={{ position: 'absolute', top: 0, left: 0, width: '100vw', height: '100%', minHeight: '100vh', zIndex: 0, overflow: 'visible', pointerEvents: 'none' }}>
-                <Canvas
-                    camera={{ position: [0, 0, 8], fov: 45 }}
-                    gl={{
-                        alpha: true,
-                        antialias: true,
-                        powerPreference: "high-performance"
-                    }}
-                    style={{ width: '100vw', height: '100vh', display: 'block' }}
-                >
-                    {/* 1. LUZ AMBIENTE: Base sólida para visibilidad general */}
-                    <ambientLight intensity={2.5} />
+                <ErrorBoundary>
+                    <Canvas
+                        camera={{ position: [0, 0, 8], fov: 45 }}
+                        gl={{
+                            alpha: true,
+                            antialias: true,
+                            powerPreference: "high-performance"
+                        }}
+                        style={{ width: '100vw', height: '100vh', display: 'block' }}
+                    >
+                        {/* 1. LUZ AMBIENTE: Base sólida para visibilidad general */}
+                        <ambientLight intensity={2.5} />
 
-                    {/* 2. KEY LIGHT: Luz principal "Sol" blanco desde arriba/derecha */}
-                    <directionalLight position={[10, 10, 10]} intensity={5.0} color="#ffffff" castShadow />
+                        {/* 2. KEY LIGHT: Luz principal "Sol" blanco desde arriba/derecha */}
+                        <directionalLight position={[10, 10, 10]} intensity={5.0} color="#ffffff" castShadow />
 
-                    {/* 3. RIM LIGHT: Luz de recorte cian desde abajo/izquierda (Brand ID) */}
-                    <directionalLight position={[-10, -10, -10]} intensity={4.0} color="#00e1ff" />
+                        {/* 3. RIM LIGHT: Luz de recorte cian desde abajo/izquierda (Brand ID) */}
+                        <directionalLight position={[-10, -10, -10]} intensity={4.0} color="#00e1ff" />
 
-                    {/* 4. FILL LIGHT: Relleno frontal suave */}
-                    <directionalLight position={[0, 0, 10]} intensity={1.5} color="#ffffff" />
+                        {/* 4. FILL LIGHT: Relleno frontal suave */}
+                        <directionalLight position={[0, 0, 10]} intensity={1.5} color="#ffffff" />
 
-                    {/* 5. ENVIRONMENT: Provee reflejos metálicos realistas */}
-                    <Environment preset="city" environmentIntensity={0.6} />
+                        {/* 5. ENVIRONMENT: Provee reflejos metálicos realistas */}
+                        <Environment preset="city" environmentIntensity={0.6} />
 
-                    <Suspense fallback={null}>
-                        <MainScene />
-                        <OrbitControls enableZoom={false} enablePan={false} />
-                    </Suspense>
+                        <Suspense fallback={null}>
+                            <MainScene />
+                            <OrbitControls enableZoom={false} enablePan={false} />
+                        </Suspense>
 
-                    {/* 6. POST-PROCESSING: Cinematic Bloom */}
-                    <EffectComposer>
-                        <Bloom luminanceThreshold={0.5} mipmapBlur luminanceSmoothing={0.9} intensity={1.2} />
-                    </EffectComposer>
-                </Canvas>
+                        {/* 6. POST-PROCESSING: Cinematic Bloom */}
+                        <EffectComposer>
+                            <Bloom luminanceThreshold={0.5} mipmapBlur luminanceSmoothing={0.9} intensity={1.2} />
+                        </EffectComposer>
+                    </Canvas>
+                </ErrorBoundary>
             </div>
 
             {/* TOP FUSION FROM HERO */}
@@ -105,11 +110,6 @@ export const OrbitalSection: React.FC = () => {
                             <div className="reveal-text md:hidden flex items-center gap-2 mb-6 animate-pulse text-primary font-mono text-[10px] tracking-widest border border-primary/20 px-3 py-1.5 rounded-sm bg-primary/5 w-fit backdrop-blur-md">
                                 <span className="material-symbols-outlined text-sm">360</span>
                                 {t.sections.drag_to_explore}
-                            </div>
-
-                            <div className="reveal-text inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/10 border border-primary/20 w-fit mb-8 self-start backdrop-blur-md">
-                                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#0df2f2]"></div>
-                                <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-primary font-bold">{t.sections.orbital_tag}</span>
                             </div>
 
                             <h2 className="reveal-text text-glow text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-8 tracking-tighter leading-[0.85] uppercase">
