@@ -4,7 +4,7 @@ import { en } from '../../locales/en';
 import { es } from '../../locales/es';
 
 export const MobileNavigation: React.FC = () => {
-    const { language, triggerLanguageSwitch } = useLanguage();
+    const { language } = useLanguage();
     const t = language === 'EN' ? en : es;
 
     return (
@@ -16,16 +16,6 @@ export const MobileNavigation: React.FC = () => {
                     ADN // CORE
                 </span>
             </div>
-
-            {/* RIGHT: LANGUAGE SWITCH */}
-            <button
-                onClick={() => triggerLanguageSwitch(language === 'EN' ? 'ES' : 'EN')}
-                className="px-3 py-1.5 rounded-sm border border-white/10 bg-white/5 hover:bg-white/10 transition-all"
-            >
-                <span className="text-[10px] font-mono tracking-widest text-white">
-                    {t.nav.switch}
-                </span>
-            </button>
         </nav>
     );
 };

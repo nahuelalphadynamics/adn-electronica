@@ -4,7 +4,7 @@ import { en } from '../../locales/en';
 import { es } from '../../locales/es';
 
 export const SideNavigation: React.FC = () => {
-    const { language, triggerLanguageSwitch } = useLanguage();
+    const { language } = useLanguage();
     const t = language === 'EN' ? en : es;
 
     const sections = [
@@ -25,16 +25,6 @@ export const SideNavigation: React.FC = () => {
 
     return (
         <div className="fixed right-6 top-1/2 -translate-y-1/2 z-[110] hidden md:flex flex-col items-center gap-8">
-            {/* LANGUAGE SWITCH */}
-            <button
-                onClick={() => triggerLanguageSwitch(language === 'EN' ? 'ES' : 'EN')}
-                className="group flex flex-col items-center gap-1 p-2 rounded-sm hover:bg-white/5 transition-all"
-            >
-                <span className="text-[10px] font-mono tracking-widest text-[#8B949E] group-hover:text-white transition-colors">
-                    {t.nav.switch}
-                </span>
-            </button>
-
             {/* DOTS NAVIGATION */}
             <div className="flex flex-col gap-4">
                 {sections.map((section) => (

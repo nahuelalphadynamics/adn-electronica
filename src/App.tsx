@@ -7,7 +7,6 @@ import { MilestonesSection } from './components/ui/MilestonesSection';
 import { ContactSection } from './components/ui/ContactSection';
 import { SideNavigation } from './components/ui/SideNavigation';
 import { MobileNavigation } from './components/ui/MobileNavigation';
-import { LanguageTransition } from './components/ui/LanguageTransition';
 import { LanguageProvider } from './context/LanguageContext';
 import { useState } from 'react';
 
@@ -16,7 +15,6 @@ function AppContent() {
 
   return (
     <div className="relative w-full bg-background-dark font-display text-slate-100 selection:bg-primary selection:text-background-dark">
-      <LanguageTransition />
       <MobileNavigation />
 
       {/* CAPA 5: BOOT SEQUENCE */}

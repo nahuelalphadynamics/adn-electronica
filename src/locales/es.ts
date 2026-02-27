@@ -43,7 +43,7 @@ export const es = {
         infrastructure_tag: "// ADVANCED_PTH_TECHNOLOGY",
         infrastructure_title: "TECNOLOGÍA PTH",
         infrastructure_title_ghost: "AVANZADA.",
-        infrastructure_desc: "Operamos la única planta en Latinoamérica con proceso PTH físico-químico de nueva generación orientado a aplicaciones de alta confiabilidad. Inversión estratégica superior a USD 2.000.000 en infraestructura productiva y maquinaria industrial.",
+        infrastructure_desc: "Operamos la única planta en Latinoamérica con proceso PTH físico-químico de nueva generación orientado a aplicaciones de alta confiabilidad. Inversión estratégica superior a USD 2.000.000 en infraestructura productiva y maquinaria industrial. Desarrollo in-house para compresión real del time-to-market. Controlamos cada etapa del proceso, garantizando una trazabilidad total en hardware crítico.",
         infrastructure_kpi_area: "ÁREA OPERATIVA",
         infrastructure_kpi_validation: "VALIDACIÓN",
         infrastructure_kpi_engineering: "INGENIERÍA IN-HOUSE",
