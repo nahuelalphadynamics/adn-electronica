@@ -100,7 +100,13 @@ export const OrbitalSection: React.FC = () => {
             <div className="relative z-10 flex flex-col h-full grow">
                 <main className="flex-grow flex relative h-full">
                     <div className="container mx-auto px-6 relative z-10 flex flex-col items-start justify-center p-8 lg:px-16 lg:pl-32 overflow-hidden pointer-events-none md:pointer-events-auto">
-                        <div className="relative z-10 flex flex-col min-h-[50vh] justify-center text-left max-w-4xl">
+                        <div className="relative z-10 flex flex-col min-h-[50vh] justify-center text-left max-w-4xl pt-8">
+                            {/* MOBILE 360 INDICATOR */}
+                            <div className="reveal-text md:hidden flex items-center gap-2 mb-6 animate-pulse text-primary font-mono text-[10px] tracking-widest border border-primary/20 px-3 py-1.5 rounded-sm bg-primary/5 w-fit backdrop-blur-md">
+                                <span className="material-symbols-outlined text-sm">360</span>
+                                {t.sections.drag_to_explore}
+                            </div>
+
                             <div className="reveal-text inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-primary/10 border border-primary/20 w-fit mb-8 self-start backdrop-blur-md">
                                 <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_#0df2f2]"></div>
                                 <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-primary font-bold">{t.sections.orbital_tag}</span>

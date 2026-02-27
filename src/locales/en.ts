@@ -53,7 +53,8 @@ export const en = {
         milestones_title: "VALIDATED",
         milestones_title_ghost: "MILESTONES.",
         orbital_standard: "CRITICAL MISSION STANDARDS",
-        swipe_to_explore: "[ SWIPE TO EXPLORE ]"
+        swipe_to_explore: "[ SWIPE TO EXPLORE ]",
+        drag_to_explore: "[ DRAG TO EXPLORE 360° ]"
     },
     milestone_list: [
         {

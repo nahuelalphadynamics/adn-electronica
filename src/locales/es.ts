@@ -53,7 +53,8 @@ export const es = {
         milestones_title: "HITOS",
         milestones_title_ghost: "VALIDADOS.",
         orbital_standard: "ESTÁNDARES DE MISIÓN CRÍTICA",
-        swipe_to_explore: "[ DESLIZAR PARA EXPLORAR ]"
+        swipe_to_explore: "[ DESLIZAR PARA EXPLORAR ]",
+        drag_to_explore: "[ ARRASTRAR PARA EXPLORAR 360° ]"
     },
     milestone_list: [
         {
