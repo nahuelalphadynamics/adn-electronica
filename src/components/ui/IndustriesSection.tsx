@@ -95,8 +95,21 @@ export const IndustriesSection: React.FC = () => {
     const t = language === 'EN' ? en : es;
 
     const [activeIndustry, setActiveIndustry] = useState(0);
+    const [renderedVideos, setRenderedVideos] = useState<number[]>([0]);
     const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
     const autoPlayRef = useRef<number | null>(null);
+
+    // Phase 78: iOS Hardware Decoder Limit Fix
+    // Keep a maximum of 2 videos in the DOM (current + fading previous)
+    useEffect(() => {
+        setRenderedVideos(prev => Array.from(new Set([...prev, activeIndustry])));
+
+        const timer = setTimeout(() => {
+            setRenderedVideos([activeIndustry]);
+        }, 800); // Wait for the 700ms opacity CSS transition to finish
+
+        return () => clearTimeout(timer);
+    }, [activeIndustry]);
 
     const industries: Industry[] = [
         {
@@ -207,13 +220,18 @@ export const IndustriesSection: React.FC = () => {
                     {/* VIDEO CONTAINER */}
                     <div className="w-full lg:w-2/3 relative">
                         <div className="aspect-video w-full bg-[#0A0E17] border border-white/10 rounded-sm overflow-hidden relative shadow-2xl">
-                            {inView && industries.map((ind) => (
-                                <ManagedVideo
-                                    key={ind.id}
-                                    ind={ind}
-                                    isActive={activeIndustry === ind.id}
-                                />
-                            ))}
+                            {inView && industries.map((ind) => {
+                                // iOS Decoder Limit Fix: Only render active or fading videos
+                                if (!renderedVideos.includes(ind.id)) return null;
+
+                                return (
+                                    <ManagedVideo
+                                        key={ind.id}
+                                        ind={ind}
+                                        isActive={activeIndustry === ind.id}
+                                    />
+                                );
+                            })}
 
                             {/* SCANLINES & OVERLAY - REMOVED LOCAL TO USE GLOBAL APP SCANLINES */}
                             <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-black/10" />
