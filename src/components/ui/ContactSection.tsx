@@ -39,8 +39,8 @@ export const ContactSection: React.FC = () => {
                     {/* COLUMNA IZQUIERDA: INFORMACIÓN Y REVERSIÓN DE RIESGO */}
                     <div className="w-full lg:w-5/12">
                         <div className="mb-8">
-                            <span className="text-primary font-mono text-xs tracking-[0.3em] uppercase mb-4 block animate-pulse">
-                                {'>'} {t.nav.protocol} // SECURE_CHANNEL
+                            <span className="text-[#8B949E] font-mono text-xs tracking-[0.3em] uppercase mb-4 block">
+                                CONTACTO // B2B
                             </span>
                             <h2 className="text-3xl md:text-5xl font-display font-black text-white uppercase tracking-tighter leading-tight mb-6">
                                 {t.contact.title} <span className="text-white/30 italic">{t.contact.title_ghost}</span>
@@ -54,14 +54,14 @@ export const ContactSection: React.FC = () => {
                             <div className="flex items-start gap-4">
                                 <span className="text-primary mt-1">::</span>
                                 <div>
-                                    <p className="text-white mb-1 tracking-widest text-xs">HQ_COORDINATES</p>
+                                    <p className="text-white mb-1 tracking-widest text-xs">SEDE CENTRAL</p>
                                     <p>Pasco 632, Rosario<br />CP 2000, Argentina</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
                                 <span className="text-primary mt-1">::</span>
                                 <div>
-                                    <p className="text-white mb-1 tracking-widest text-xs">DIRECT_UPLINK</p>
+                                    <p className="text-white mb-1 tracking-widest text-xs">CONTACTO DIRECTO</p>
                                     <p>+54 341 2634200</p>
                                     <p className="text-primary hover:text-white transition-colors cursor-pointer">info@adn-electronica.com.ar</p>
                                 </div>
