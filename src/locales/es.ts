@@ -76,7 +76,7 @@ export const es = {
             description: "Controladores robustos (IP67) para refinerías y plataformas de extracción bajo condiciones extremas."
         },
         {
-            title: "MINERÍA PESADA",
+            title: "MINERÍA Y ENERGÍA",
             description: "Sistemas electrónicos tolerantes a vibración y polvo para maquinaria autónoma y excavación."
         },
         {

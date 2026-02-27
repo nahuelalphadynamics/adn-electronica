@@ -1,6 +1,5 @@
 import { InitScreen } from './components/ui/InitScreen';
 import { HeroSection } from './components/ui/HeroSection';
-import { InteractiveCircuitBg } from './components/ui/InteractiveCircuitBg';
 import { InfrastructureSection } from './components/ui/InfrastructureSection';
 import { OrbitalSection } from './components/ui/OrbitalSection';
 import { IndustriesSection } from './components/ui/IndustriesSection';
@@ -19,9 +18,6 @@ function AppContent() {
     <div className="relative w-full bg-background-dark font-display text-slate-100 selection:bg-primary selection:text-background-dark">
       <LanguageTransition />
       <MobileNavigation />
-
-      {/* CAPA -1: INTERACTIVE BACKGROUND */}
-      <InteractiveCircuitBg />
 
       {/* CAPA 5: BOOT SEQUENCE */}
       {!bootComplete && <InitScreen onComplete={() => setBootComplete(true)} />}

@@ -76,7 +76,7 @@ export const en = {
             description: "Robust controllers (IP67) for refineries and extraction platforms under extreme conditions."
         },
         {
-            title: "HEAVY MINING",
+            title: "MINING & ENERGY",
             description: "Vibration and dust-tolerant electronic systems for autonomous machinery and excavation."
         },
         {
